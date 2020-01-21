@@ -228,18 +228,18 @@ db.session.add_all([
     Class2,
     Class3,
     Class4,
-    Method1,
-    Method2,
-    Method3,
-    Method4,
-    Method5,
-    Method6,
-    Parameter1,
-    Parameter2,
-    Parameter3,
-    Parameter4,
-    Parameter5,
-    Parameter6
+#     Method1,
+#     Method2,
+#     Method3,
+#     Method4,
+#     Method5,
+#     Method6,
+#     Parameter1,
+#     Parameter2,
+#     Parameter3,
+#     Parameter4,
+#     Parameter5,
+#     Parameter6
 ])
 
 db.session.commit()
