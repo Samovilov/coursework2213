@@ -1,0 +1,36 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+
+
+ <div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">parameter_name</th>
+                <th scope="col">parameter_type</th>
+                <th scope="col">parameter_description</th>
+                <th scope="col">method_name</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for parameter in parameters %}
+            <tr >
+                <td> {{parameter.parameter_name}} </td>
+                <td> {{parameter.parameter_type}} </td>
+                <td> {{parameter.parameter_description}} </td>
+                <td> {{parameter.method_name}} </td>
+                <td>
+                    <a href="/edit_parameter/{{parameter.parameter_name}}" type="button" class="btn btn-warning">Edit</a>
+                    <a href="/delete_parameter/{{parameter.parameter_name}}" type="button" class="btn btn-warning">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+ </div>
+
+
+
+{% endblock %}

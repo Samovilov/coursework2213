@@ -1,0 +1,38 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+
+
+ <div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">method_name</th>
+                <th scope="col">method_description</th>
+                <th scope="col">output_type</th>
+                <th scope="col">memory_size</th>
+                <th scope="col">class_name</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for method in methods %}
+            <tr >
+                <td> {{method.method_name}} </td>
+                <td> {{method.method_description}} </td>
+                <td> {{method.output_type}} </td>
+                <td> {{method.memory_size}} </td>
+                <td> {{method.class_name}} </td>
+                <td>
+                    <a href="/edit_method/{{method.method_name}}" type="button" class="btn btn-warning">Edit</a>
+                    <a href="/delete_method/{{method.method_name}}" type="button" class="btn btn-warning">Delete</a>
+                    <a href="/new_parameter/{{method.method_name}}" type="button" class="btn btn-warning">Add parameter</a>
+                </td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+ </div>
+
+{% endblock %}
