@@ -69,10 +69,10 @@ class OrmParameter(db.Model):
     parameter_type = db.Column(db.String(25), nullable=False)
     method_name = db.Column(db.String(30), db.ForeignKey('method.method_name'), nullable=False)
 
-db.drop_all()
+# db.drop_all()
 
 
-db.create_all()
+# db.create_all()
 
 # User1 = OrmUser(
 #     user_email='Sergei@gmail.com',
