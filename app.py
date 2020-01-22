@@ -74,175 +74,175 @@ db.drop_all()
 
 db.create_all()
 
-User1 = OrmUser(
-    user_email='Sergei@gmail.com',
-    user_name ='Sergei',
-    user_age=20,
-    user_university='KPI'
-)
+# User1 = OrmUser(
+#     user_email='Sergei@gmail.com',
+#     user_name ='Sergei',
+#     user_age=20,
+#     user_university='KPI'
+# )
 
-User2 = OrmUser(
-    user_email='Igor@gmail.com',
-    user_name ='Igor',
-    user_age=25,
-    user_university='NAU'
-)
-User3 = OrmUser(
-    user_email='Petr@gmail.com',
-    user_name ='Petr',
-    user_age=16,
-    user_university='KPI'
-)
-User4 = OrmUser(
-    user_email='Gorg@gmail.com',
-    user_name ='Georgiu',
-    user_age=20,
-    user_university='KNUBA'
-)
-
-
-Class1 = OrmClass(
-    class_name='Numeric operations',
-    methods_quantity=3,
-    class_description='Class of basic actions with numbers',
-    user_email='Gorg@gmail.com'
-)
-
-Class2 = OrmClass(
-    class_name='Numeric operations advanced',
-    methods_quantity=2,
-    class_description='Complicated actions with numbers',
-    user_email='Gorg@gmail.com'
-)
-
-Class3 = OrmClass(
-    class_name='String operations',
-    methods_quantity=2,
-    class_description='Class of basic actions with strings',
-    user_email='Petr@gmail.com'
-)
-
-Class4 = OrmClass(
-    class_name='String operations advanced',
-    methods_quantity=2,
-    class_description='Complicated actions with strings',
-    user_email='Sergei@gmail.com'
-)
-
-Method1 = OrmMethod(
-    method_name='Adding numbers',
-    method_description='Adding two numbers',
-    output_type='Numeric',
-    memory_size='32',
-    class_name='Numeric operations'
-)
-
-Method2 = OrmMethod(
-    method_name='Number exponentiation',
-    method_description='Raising first number to the power of second one',
-    output_type='Numeric',
-    memory_size='64',
-    class_name='Numeric operations advanced'
-)
-
-Method3 = OrmMethod(
-    method_name='Adding strings',
-    method_description='Adding two strings',
-    output_type='String',
-    memory_size='128',
-    class_name='String operations'
-)
-
-Method4 = OrmMethod(
-    method_name='Finding string',
-    method_description='Defies, if one string contains another',
-    output_type='Boolean',
-    memory_size='256',
-    class_name='String operations advanced'
-)
-
-Method6 = OrmMethod(
-    method_name='Putting string',
-    method_description='Defies, if one string contains another',
-    output_type='String',
-    memory_size='256',
-    class_name='String operations advanced'
-)
+# User2 = OrmUser(
+#     user_email='Igor@gmail.com',
+#     user_name ='Igor',
+#     user_age=25,
+#     user_university='NAU'
+# )
+# User3 = OrmUser(
+#     user_email='Petr@gmail.com',
+#     user_name ='Petr',
+#     user_age=16,
+#     user_university='KPI'
+# )
+# User4 = OrmUser(
+#     user_email='Gorg@gmail.com',
+#     user_name ='Georgiu',
+#     user_age=20,
+#     user_university='KNUBA'
+# )
 
 
-Method5 = OrmMethod(
-    method_name='1 more then 2',
-    method_description='Defies, if one string contains another',
-    output_type='Boolean',
-    memory_size='32',
-    class_name='String operations advanced'
-)
-Parameter1 = OrmParameter(
-    parameter_name='Parameter 1',
-    parameter_type='integer',
-    parameter_description='First parameter',
-    method_name='Adding numbers'
-)
+# Class1 = OrmClass(
+#     class_name='Numeric operations',
+#     methods_quantity=3,
+#     class_description='Class of basic actions with numbers',
+#     user_email='Gorg@gmail.com'
+# )
 
-Parameter2 = OrmParameter(
-    parameter_name='Parameter 2',
-    parameter_type='integer',
-    parameter_description='First parameter',
-    method_name='Adding numbers'
-)
+# Class2 = OrmClass(
+#     class_name='Numeric operations advanced',
+#     methods_quantity=2,
+#     class_description='Complicated actions with numbers',
+#     user_email='Gorg@gmail.com'
+# )
 
-Parameter3 = OrmParameter(
-    parameter_name='Parameter 3',
-    parameter_type='string',
-    parameter_description='First parameter',
-    method_name='Finding string'
-)
+# Class3 = OrmClass(
+#     class_name='String operations',
+#     methods_quantity=2,
+#     class_description='Class of basic actions with strings',
+#     user_email='Petr@gmail.com'
+# )
 
-Parameter4 = OrmParameter(
-    parameter_name='Parameter 4',
-    parameter_type='float',
-    parameter_description='First parameter',
-    method_name='Number exponentiation'
-)
+# Class4 = OrmClass(
+#     class_name='String operations advanced',
+#     methods_quantity=2,
+#     class_description='Complicated actions with strings',
+#     user_email='Sergei@gmail.com'
+# )
 
-Parameter5 = OrmParameter(
-    parameter_name='Parameter 5',
-    parameter_type='float',
-    parameter_description='First parameter',
-    method_name='Number exponentiation'
-)
+# Method1 = OrmMethod(
+#     method_name='Adding numbers',
+#     method_description='Adding two numbers',
+#     output_type='Numeric',
+#     memory_size='32',
+#     class_name='Numeric operations'
+# )
 
-Parameter6 = OrmParameter(
-    parameter_name='Parameter 6',
-    parameter_type='string',
-    parameter_description='First parameter',
-    method_name='Finding string'
-)
-db.session.add_all([
+# Method2 = OrmMethod(
+#     method_name='Number exponentiation',
+#     method_description='Raising first number to the power of second one',
+#     output_type='Numeric',
+#     memory_size='64',
+#     class_name='Numeric operations advanced'
+# )
 
-    User1,
-    User2,
-    User3,
-    User4,
-    Class1,
-    Class2,
-    Class3,
-    Class4,
-    Method1,
-    Method2,
-    Method3,
-    Method4,
-    Method5,
-    Method6,
-    Parameter1,
-    Parameter2,
-    Parameter3,
-    Parameter4,
-    Parameter5,
-    Parameter6
-])
+# Method3 = OrmMethod(
+#     method_name='Adding strings',
+#     method_description='Adding two strings',
+#     output_type='String',
+#     memory_size='128',
+#     class_name='String operations'
+# )
 
-db.session.commit()
+# Method4 = OrmMethod(
+#     method_name='Finding string',
+#     method_description='Defies, if one string contains another',
+#     output_type='Boolean',
+#     memory_size='256',
+#     class_name='String operations advanced'
+# )
+
+# Method6 = OrmMethod(
+#     method_name='Putting string',
+#     method_description='Defies, if one string contains another',
+#     output_type='String',
+#     memory_size='256',
+#     class_name='String operations advanced'
+# )
+
+
+# Method5 = OrmMethod(
+#     method_name='1 more then 2',
+#     method_description='Defies, if one string contains another',
+#     output_type='Boolean',
+#     memory_size='32',
+#     class_name='String operations advanced'
+# )
+# Parameter1 = OrmParameter(
+#     parameter_name='Parameter 1',
+#     parameter_type='integer',
+#     parameter_description='First parameter',
+#     method_name='Adding numbers'
+# )
+
+# Parameter2 = OrmParameter(
+#     parameter_name='Parameter 2',
+#     parameter_type='integer',
+#     parameter_description='First parameter',
+#     method_name='Adding numbers'
+# )
+
+# Parameter3 = OrmParameter(
+#     parameter_name='Parameter 3',
+#     parameter_type='string',
+#     parameter_description='First parameter',
+#     method_name='Finding string'
+# )
+
+# Parameter4 = OrmParameter(
+#     parameter_name='Parameter 4',
+#     parameter_type='float',
+#     parameter_description='First parameter',
+#     method_name='Number exponentiation'
+# )
+
+# Parameter5 = OrmParameter(
+#     parameter_name='Parameter 5',
+#     parameter_type='float',
+#     parameter_description='First parameter',
+#     method_name='Number exponentiation'
+# )
+
+# Parameter6 = OrmParameter(
+#     parameter_name='Parameter 6',
+#     parameter_type='string',
+#     parameter_description='First parameter',
+#     method_name='Finding string'
+# )
+# db.session.add_all([
+
+#     User1,
+#     User2,
+#     User3,
+#     User4,
+#     Class1,
+#     Class2,
+#     Class3,
+#     Class4,
+#     Method1,
+#     Method2,
+#     Method3,
+#     Method4,
+#     Method5,
+#     Method6,
+#     Parameter1,
+#     Parameter2,
+#     Parameter3,
+#     Parameter4,
+#     Parameter5,
+#     Parameter6
+# ])
+
+# db.session.commit()
 
 @app.route('/parameters')
 def parameters():
