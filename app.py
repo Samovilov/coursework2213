@@ -8,6 +8,7 @@ from forms.edit_class_form import EditClassForm
 from forms.class_form import ClassForm
 from forms.method_form import MethodForm
 from forms.edit_method_form import EditMethodForm
+from forms.hastag_form import HastagForm
 import uuid
 import json
 import plotly
@@ -37,7 +38,7 @@ class OrmUser(db.Model):
     user_email = db.Column(db.String(45), primary_key=True)
     user_name = db.Column(db.String(25), nullable=False)
     user_age = db.Column(db.Integer, nullable=False)
-    user_university = db.Column(db.String(25), nullable=False)
+    user_university = db.Column(db.String(25), nullable=False, unique=True)
 
     class_ = db.relationship('OrmClass')
 
@@ -76,49 +77,49 @@ db.create_all()
 
 User1 = OrmUser(
     user_email='Sergei@gmail.com',
-    user_name ='Sergei',
+    user_name ='Сергей',
     user_age=20,
-    user_university='KPI'
+    user_university='КВ12345678'
 )
 
 User2 = OrmUser(
     user_email='Igor@gmail.com',
-    user_name ='Igor',
+    user_name ='Игорь',
     user_age=25,
-    user_university='NAU'
+    user_university='КТ12345678'
 )
 User3 = OrmUser(
     user_email='Petr@gmail.com',
-    user_name ='Petr',
+    user_name ='Петр',
     user_age=16,
-    user_university='KPI'
+    user_university='КЕ12345678'
 )
 User4 = OrmUser(
     user_email='Gorg@gmail.com',
-    user_name ='Georgiu',
+    user_name ='Георгий',
     user_age=20,
-    user_university='KNUBA'
+    user_university='КП12345678'
 )
 
 
 Class1 = OrmClass(
     class_name='Numeric operations',
     methods_quantity=3,
-    class_description='Class of basic actions with numbers',
+    class_description='Adding, substracting, multiplying numbers',
     user_email='Gorg@gmail.com'
 )
 
 Class2 = OrmClass(
     class_name='Numeric operations advanced',
     methods_quantity=2,
-    class_description='Complicated actions with numbers',
+    class_description='Powering, rooting numbers',
     user_email='Gorg@gmail.com'
 )
 
 Class3 = OrmClass(
     class_name='String operations',
     methods_quantity=2,
-    class_description='Class of basic actions with strings',
+    class_description='Basic actions with strings',
     user_email='Petr@gmail.com'
 )
 
@@ -128,6 +129,22 @@ Class4 = OrmClass(
     class_description='Complicated actions with strings',
     user_email='Sergei@gmail.com'
 )
+
+Class5 = OrmClass(
+    class_name='String operations advanced',
+    methods_quantity=2,
+    class_description='Complicated actions with strings',
+    user_email='Igor@gmail.com'
+)
+
+Class6 = OrmClass(
+    class_name='String operations advanced',
+    methods_quantity=2,
+    class_description='Complicated actions with strings',
+    user_email='Sergei@gmail.com'
+)
+
+
 
 Method1 = OrmMethod(
     method_name='Adding numbers',
@@ -156,23 +173,23 @@ Method3 = OrmMethod(
 Method4 = OrmMethod(
     method_name='Finding string',
     method_description='Defies, if one string contains another',
-    output_type='Boolean',
-    memory_size='256',
-    class_name='String operations advanced'
-)
-
-Method6 = OrmMethod(
-    method_name='Putting string',
-    method_description='Defies, if one string contains another',
     output_type='String',
     memory_size='256',
     class_name='String operations advanced'
 )
 
-
 Method5 = OrmMethod(
+    method_name='Substracting numbers',
+    method_description='Substracting second number from the first one',
+    output_type='Numeric',
+    memory_size='256',
+    class_name='String operations advanced'
+)
+
+
+Method6 = OrmMethod(
     method_name='1 more then 2',
-    method_description='Defies, if one string contains another',
+    method_description='Defies, if first number bigger than second one',
     output_type='Boolean',
     memory_size='32',
     class_name='String operations advanced'
@@ -180,42 +197,42 @@ Method5 = OrmMethod(
 Parameter1 = OrmParameter(
     parameter_name='Parameter 1',
     parameter_type='integer',
-    parameter_description='First parameter',
+    parameter_description='First number in adding',
     method_name='Adding numbers'
 )
 
 Parameter2 = OrmParameter(
     parameter_name='Parameter 2',
-    parameter_type='integer',
-    parameter_description='First parameter',
+    parameter_type='string',
+    parameter_description='Second number in adding ',
     method_name='Adding numbers'
 )
 
 Parameter3 = OrmParameter(
     parameter_name='Parameter 3',
-    parameter_type='string',
-    parameter_description='First parameter',
+    parameter_type='float',
+    parameter_description='First string in finding',
     method_name='Finding string'
 )
 
 Parameter4 = OrmParameter(
     parameter_name='Parameter 4',
     parameter_type='float',
-    parameter_description='First parameter',
+    parameter_description='First parameter for exponentiation',
     method_name='Number exponentiation'
 )
 
 Parameter5 = OrmParameter(
     parameter_name='Parameter 5',
     parameter_type='float',
-    parameter_description='First parameter',
+    parameter_description='Second parameter for exponentiation',
     method_name='Number exponentiation'
 )
 
 Parameter6 = OrmParameter(
     parameter_name='Parameter 6',
     parameter_type='string',
-    parameter_description='First parameter',
+    parameter_description='Second string in finding',
     method_name='Finding string'
 )
 db.session.add_all([
@@ -676,6 +693,98 @@ def dashboard():
 
     graphs_json = json.dumps(data, cls=plotly.utils.PlotlyJSONEncoder)
     return render_template('dashboard.html', graphsJSON=graphs_json,massage=massage,corr_coef=corr_coef)
+
+
+def trio(word, number):
+    return(word[number:number+3])
+
+
+def search_in_sent(search_word, description_str):
+    desc_split = description_str.split()
+    count_overlap = 0
+    for three in range(len(search_word)):
+        for word in desc_split:
+            if len(word) >= 3 and len(word) > len(search_word):
+                for i in range(len(word) - 2):
+                    if trio(word, i) == trio(search_word, three):
+                        count_overlap += 0.24
+            else:
+                continue
+
+    for word in desc_split:
+        if len(word) >= 3 and len(word) <= len(search_word):
+            diff = len(search_word) - len(word)
+            for s in range(diff + 1):
+                if search_word[s:s + len(word)] == word:
+                    count_overlap += 1
+    return count_overlap
+
+
+@app.route('/Hashtag', methods=['GET', 'POST'])
+def Hashtag():
+    form = HastagForm()
+    if request.method == 'POST':
+        if form.validate():
+            choice = form.choice.data
+            words = form.words.data
+
+            if choice == 'class':
+                descriptions = db.session.query(OrmClass.class_description).all()
+            if choice == 'method':
+                descriptions = db.session.query(OrmMethod.method_description).all()
+            if choice == 'parameter':
+                descriptions = db.session.query(OrmParameter.parameter_description).all()
+
+            desc_score = {}
+            scores = []
+            for desc in list(descriptions):
+                sum_score = 0
+                for word in words.split():
+                    sum_score += search_in_sent(word, desc[0])
+                desc_score[sum_score] = desc
+                scores.append(sum_score)
+
+
+            scores.sort(reverse = True)
+
+            if max(scores) < 0.2:
+                return render_template('not_found.html')
+
+            scores = list(dict.fromkeys(scores))
+            sorted_for_html = []
+            print(scores)
+            print(desc_score)
+            if choice == 'class':
+                for score in scores:
+                    if score < 0.22:
+                        continue
+                    res = db.session.query(OrmClass).filter(OrmClass.class_description == desc_score[score]).all()
+                    for row in res:
+                        sorted_for_html.append(row)
+                return render_template('class_table.html', classes=sorted_for_html)
+
+            if choice == 'method':
+                for score in scores:
+                    if score < 0.22:
+                        continue
+                    res = db.session.query(OrmMethod).filter(OrmMethod.method_description == desc_score[score]).all()
+                    for row in res:
+                        sorted_for_html.append(row)
+                return render_template('methods_table.html', methods=sorted_for_html)
+
+            if choice == 'class':
+                for score in scores:
+                    if score < 0.22:
+                        continue
+                    res = db.session.query(OrmParameter).filter(OrmParameter.parameter_description == desc_score[score]).all()
+                    for row in res:
+                        sorted_for_html.append(row)
+                return render_template('parameters_table.html', parameters=sorted_for_html)
+        else:
+            return render_template('hashtag_form.html', form=form)
+    elif request.method == 'GET':
+        return render_template('hashtag_form.html', form=form)
+
 
 if __name__ == '__main__':
     app.debug = True

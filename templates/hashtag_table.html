@@ -1,0 +1,32 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+
+
+ <div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">class_name</th>
+                <th scope="col">methods_quantity</th>
+                <th scope="col">class_description</th>
+                <th scope="col">form user_email</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for class in classes %}
+            <tr >
+                <td> {{class.class_name}} </td>
+                <td> {{class.methods_quantity}} </td>
+                <td> {{class.class_description}} </td>
+                <td> {{class.user_email}} </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+ </div>
+
+
+
+{% endblock %}
